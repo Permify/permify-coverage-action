@@ -1,0 +1,43 @@
+schema: >-
+    entity user {}
+
+    entity organization {
+
+        relation admin @user
+        relation member @user
+
+        permission create_repository = (admin or member)
+        permission delete = admin
+    }
+
+    entity repository {
+
+        relation owner @user
+        relation parent @organization
+
+        permission push = owner
+        permission read = (owner and (parent.admin and parent.member))
+        permission delete = (parent.member and (parent.admin or owner))
+    }
+
+relationships:
+    - "organization:1#admin@user:1"
+    - "organization:1#member@user:1"
+    - "repository:1#owner@user:1"
+
+scenarios:
+  - name: "scenario 1"
+    description: "test description"
+    checks:
+      - entity: "repository:1"
+        subject: "user:1"
+        assertions:
+          push : true
+      - entity: "repository:2"
+        subject: "user:1"
+        assertions:
+          push : false
+      - entity: "repository:3"
+        subject: "user:1"
+        assertions:
+          push : false

@@ -1,0 +1,22 @@
+---
+name: "Permify Schema Coverage Action"
+description: "Runs the `permify coverage` command on the given schema validation file."
+author: "Permify"
+
+inputs:
+  validationFile:
+    description: "path to the YAML file containing schema (authorization model), relationships (sample authorization data), assertions (sample check queries and results)."
+    required: true
+    default: '/shapes'
+  coverageRelationships:
+    description: "coverage percentage of relationships want to be covered."
+    required: false
+    default: 0
+  coverageAssertions:
+    description: "coverage percentage of assertions want to be covered."
+    required: false
+    default: 0
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
