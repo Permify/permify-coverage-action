@@ -1,6 +1,6 @@
 <h1 align="center">
     <img src="https://raw.githubusercontent.com/Permify/permify/master/assets/permify-logo.svg" alt="Permify logo" width="336px" /><br />
-    Permify Schema Validate GitHub Action
+    Permify Schema Coverage GitHub Action
 </h1>
 
 <p align="center">
